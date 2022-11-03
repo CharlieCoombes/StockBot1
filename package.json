@@ -17,6 +17,7 @@
     "cron": "^2.1.0",
     "dotenv": "^16.0.3",
     "nodemon": "^2.0.20",
+    "puppeteer": "^19.2.2",
     "twitter-api-v2": "^1.12.9"
   }
 }
