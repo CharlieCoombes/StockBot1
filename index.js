@@ -10,6 +10,10 @@ const tweet = async () => {
     }
 }
 
-tweet();
+console.log(
+    "Politician: Name", '\n' +
+    "Stock Purchased: Stock", '\n' +
+    "Amount Purchased: Amount", '\n'
+);
 
 //tweet();

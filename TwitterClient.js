@@ -1,4 +1,7 @@
 const { TwitterApi } = require("twitter-api-v2");
+const dotenv = require('dotenv');
+
+dotenv.config({ path: './config.env'  });
 
 const client =  new TwitterApi({
     appKey: "td7EDAMjTA0yFxCgB69VChZzo",
