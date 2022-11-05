@@ -3,25 +3,34 @@ const rwClient = require("./TwitterClient.js");
 const cronjob = require("cron").CronJob;
 const puppeteer = require("puppeteer");
 
+// Url where we get and scrape the data from
+const URL = "https://www.sec.gov/edgar/search/#/category=form-cat2";
+
 (async () => {
     try {
         const chromeBrowser = await puppeteer.launch({ headless: true });
         const page = await chromeBrowser.newPage();
-        await page.goto("https://www.sec.gov/edgar/search/#/category=form-cat2", {timeout: 0});
+        await page.goto(URL, {timeout: 0});
 
     const getInfo = await page.evaluate(() => {
         const secTableEN = document.querySelector(".table td.entity-name");
         const secTableFiled = document.querySelector(".table td.filed");
-        const secTableLink = document.querySelector(".table td.filetype");
+        const secTableLinkPrice = document.querySelector('.FormText');
 
         return {
             secTableEN: secTableEN.innerText,
             secTableFiled: secTableFiled.innerText,
+            secTableLinkPrice: secTableLinkPrice.innerText,
         };
-    })
+    });
 
-    console.log(getInfo.secTableEN);
-    console.log(getInfo.secTableFiled);
+    await page.waitForSelector('.FormText');
+
+    console.log(
+        "Name: " + getInfo.secTableEN, '\n' +
+        "Amount Purchased: " + getInfo.secTableLinkPrice, '\n'
+    );
+
     await page.close();
     await chromeBrowser.close();
     } catch (e) {
@@ -37,12 +46,6 @@ const tweet = async () => {
         console.error(error)
     }
 }
-
-/*console.log(
-    "Politician: Name", '\n' +
-    "Stock Purchased: Stock", '\n' +
-    "Amount Purchased: Amount", '\n'
-);*/
 
 
 //tweet();
