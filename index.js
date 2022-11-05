@@ -15,7 +15,7 @@ const URL = "https://www.sec.gov/edgar/search/#/category=form-cat2";
     const getInfo = await page.evaluate(() => {
         const secTableEN = document.querySelector(".table td.entity-name");
         const secTableFiled = document.querySelector(".table td.filed");
-        const secTableLinkPrice = document.querySelector('.FormText');
+        const secTableLinkPrice = document.querySelector('.FormData')[46];
 
         return {
             secTableEN: secTableEN.innerText,
@@ -23,8 +23,6 @@ const URL = "https://www.sec.gov/edgar/search/#/category=form-cat2";
             secTableLinkPrice: secTableLinkPrice.innerText,
         };
     });
-
-    await page.waitForSelector('.FormText');
 
     console.log(
         "Name: " + getInfo.secTableEN, '\n' +
