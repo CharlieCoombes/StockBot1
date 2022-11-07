@@ -4,13 +4,14 @@ const cronjob = require("cron").CronJob;
 const puppeteer = require("puppeteer");
 
 // Url where we get and scrape the data from
-const URL = "https://www.sec.gov/edgar/search/#/category=form-cat2";
+const url = "https://www.sec.gov/edgar/search/#/category=form-cat2";
 
+let browser;
 (async () => {
     try {
-        const chromeBrowser = await puppeteer.launch({ headless: true });
-        const page = await chromeBrowser.newPage();
-        await page.goto(URL, {timeout: 0});
+        browser = await puppeteer.launch({ headless: true });
+        const page = await browser.newPage();
+        await page.goto(url, {timeout: 0});
 
     const getInfo = await page.evaluate(() => {
         const secTableEN = document.querySelector(".table td.entity-name");
