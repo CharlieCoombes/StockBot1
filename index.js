@@ -14,14 +14,13 @@ const nameModule = require("./name");
                 "Amount Purchased: " + await priceModule() + '\n'
             );
 
-            
         } catch (error) {
             console.error(error)
         }
     }
 
     // CronJob, executes every 5 hours
-    const job = new cronjob("0 */2 * * *", () => {
+    const job = new cronjob("*/2 * * * *", () => {
         tweet(); // Send out the Tweet
     });
 

@@ -4,6 +4,7 @@ const puppeteer = require("puppeteer");
 // Url where we get and scrape the data from
 const url = "https://www.sec.gov/edgar/search/#/dateRange=30d&category=custom&forms=4";
 
+let browser;
 module.exports = () => (async () => {
     browser = await puppeteer.launch();
     const [page] = await browser.pages();
