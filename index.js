@@ -12,7 +12,9 @@ const nameModule = require("./name");
             await rwClient.v2.tweet(
                 "Name: " + await nameModule() + '\n' +
                 "Amount Purchased: " + await priceModule() + '\n'
-                );
+            );
+
+            
         } catch (error) {
             console.error(error)
         }
