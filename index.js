@@ -19,11 +19,17 @@ const nameModule = require("./name");
         }
     }
 
+    console.log("Executed")
+
     // CronJob, executes every 5 hours
-    const job = new cronjob("*/2 * * * *", () => {
+    const job = new cronjob("* * * * *", () => {
         tweet(); // Send out the Tweet
     });
 
-    job.start();
+job.start();
+
+    
 })();
+
+
 
