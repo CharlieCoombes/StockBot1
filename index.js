@@ -1,13 +1,12 @@
 // MODULES
 const rwClient = require("./TwitterClient.js");
+const cronjob = require("cron").CronJob;
 const priceModule = require("./price");
 const nameModule = require("./name");
 
 (async () => {
-    console.log(
-        "Name: " + await nameModule() + '\n' 
-    + "Amount Purchased: " + await priceModule() + '\n');
 
+    // Async function that creates the Tweet
     const tweet = async () => {
         try {
             await rwClient.v2.tweet(
@@ -18,6 +17,12 @@ const nameModule = require("./name");
             console.error(error)
         }
     }
-    tweet();
+
+    // CronJob, executes every 5 hours
+    const job = new cronjob("0 */6 * * *", () => {
+        tweet(); // Send out the Tweet
+    });
+
+    job.start();
 })();
 

@@ -1,6 +1,4 @@
 // MODULES
-const rwClient = require("./TwitterClient.js");
-const cronjob = require("cron").CronJob;
 const puppeteer = require("puppeteer");
 
 // Url where we get and scrape the data from
