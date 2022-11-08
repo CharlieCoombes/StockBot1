@@ -4,7 +4,7 @@ const cronjob = require("cron").CronJob;
 const puppeteer = require("puppeteer");
 
 // Url where we get and scrape the data from
-const url = "https://www.sec.gov/edgar/search/#/dateRange=custom&category=custom&startdt=2017-11-05&enddt=2022-11-07&forms=4";
+const url = "https://www.sec.gov/edgar/search/#/dateRange=30d&category=custom&forms=4";
 
 let browser;
 module.exports = () => (async () => {
