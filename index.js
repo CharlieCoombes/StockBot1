@@ -19,11 +19,25 @@ const nameModule = require("./name");
         }
     }
 
-    console.log("Executed")
+    console.log(
+        "Name: " + await nameModule() + '\n' +
+        "Amount Purchased: " + await priceModule() + '\n'
+    );
 
-    // CronJob, executes every 5 hours
-    const job = new cronjob("*/10 * * * *", () => {
-        tweet(); // Send out the Tweet
+    tweet();//
+    console.log("Tweet executed");
+
+    // CronJob, executes every 6 hours
+    const job = new cronjob("0 */4 * * *", () => {
+
+        /*if (nameModule === nameModule || priceModule === priceModule) {
+            console.log("Same content");
+        } else {
+            tweet();
+        }*/
+
+        tweet();
+        console.log("Next tweet executed");
     });
 
     job.start();
