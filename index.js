@@ -24,8 +24,8 @@ const nameModule = require("./name");
         "Amount Purchased: " + await priceModule() + '\n'
     );
 
-    tweet();//
-    console.log("Tweet executed");
+    //tweet();
+    //console.log("Tweet executed");
 
     // CronJob, executes every 6 hours
     const job = new cronjob("0 */4 * * *", () => {
