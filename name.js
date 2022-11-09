@@ -17,7 +17,7 @@ module.exports = () => (async () => {
     secTableFiled: await text(".table td.filed"),
     secTableLink: await text(".table td.filetype"),
   };
-
+  
   return info.secTableEN;
 })()
   .catch(err => console.error(err))
