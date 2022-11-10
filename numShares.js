@@ -18,16 +18,15 @@ module.exports = () => (async () => {
     await a.click();
     const html = await (await responseP).text();
     await page.evaluate(html => document.body.outerHTML = html, html);
-    const stock = await page.$$eval("a:nth-child(3)", els =>
-      els.find(e => e.textContent.trim())
+    
+    const numShare = await page.$$eval(".FormData", els =>
+      els.find(e => e.textContent.includes(',000'))
         .parentNode
         .textContent
-        .replace("2. Issuer Name and Ticker or Trading Symbol", "")
-        .replace(/\r?\n|\r/g,'')
         .trim()
     );
 
-    return stock;
+    return numShare;
 
   })()
     .catch(err => console.error(err))

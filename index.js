@@ -5,6 +5,7 @@ const priceModule = require("./price");
 const nameModule = require("./name");
 const dateModule = require("./date");
 const stockModule = require("./stock");
+const numShares = require("./numShares.js");
 
 (async () => {
 
@@ -21,13 +22,17 @@ const stockModule = require("./stock");
         }
     }
 
-    console.log(
-        "New form 4 filed!" + '\n' + '\n' +
-        await nameModule() + " bought X number of shares at " + await priceModule() + '\n' + '\n' +
+    const job = new cronjob("* * * * *", async () => {
+        console.log(
+            "New form 4 filed!" + '\n' + '\n' +
+            await nameModule() + " bought " + await numShares() + " shares at " + await priceModule() + '\n' + '\n' +
+    
+            "Stock: " + await stockModule() + '\n' +
+            "Date: " + await dateModule() + '\n'
+        );
+    });
 
-        "Stock: " + await stockModule() + '\n' +
-        "Date: " + await dateModule() + '\n'
-    );
+    job.start();
 
     // CronJob, executes every 6 hours
     /*const job = new cronjob("0 15-21 * * *", () => {
