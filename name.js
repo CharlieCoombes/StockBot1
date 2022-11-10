@@ -12,12 +12,13 @@ module.exports = () => (async () => {
   const text = async (...args) =>
     (await $(...args)).evaluate(el => el.textContent.trim());
   await page.goto(url, {waitUntil: "domcontentloaded"});
+  await page.reload({waitUntil: "domcontentloaded"});
   const info = {
     secTableEN: await text(".table td.entity-name"),
     secTableFiled: await text(".table td.filed"),
     secTableLink: await text(".table td.filetype"),
   };
-  
+
   return info.secTableEN;
 })()
   .catch(err => console.error(err))
