@@ -3,6 +3,8 @@ const rwClient = require("./TwitterClient.js");
 const cronjob = require("cron").CronJob;
 const priceModule = require("./price");
 const nameModule = require("./name");
+const dateModule = require("./date");
+const stockModule = require("./stock");
 
 (async () => {
 
@@ -20,27 +22,20 @@ const nameModule = require("./name");
     }
 
     console.log(
-        "Name: " + await nameModule() + '\n' +
-        "Amount Purchased: " + await priceModule() + '\n'
+        "New form 4 filed!" + '\n' + '\n' +
+        await nameModule() + " bought X number of shares at " + await priceModule() + '\n' + '\n' +
+
+        "Stock: " + await stockModule() + '\n' +
+        "Date: " + await dateModule() + '\n'
     );
 
-    tweet();
-    console.log("Tweet executed");
-
     // CronJob, executes every 6 hours
-    const job = new cronjob("0 */4 * * *", () => {
-
-        /*if (nameModule === nameModule || priceModule === priceModule) {
-            console.log("Same content");
-        } else {
-            tweet();
-        }*/
-
+    /*const job = new cronjob("0 15-21 * * *", () => {
         tweet();
-        console.log("Next tweet executed");
+        console.log("Tweet executed");
     });
 
-    job.start();
+    job.start();*/
   
 })();
 

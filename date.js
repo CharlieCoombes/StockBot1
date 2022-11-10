@@ -13,10 +13,10 @@ module.exports = () => (async () => {
     (await $(...args)).evaluate(el => el.textContent.trim());
   await page.goto(url, {waitUntil: "domcontentloaded"});
   const info = {
-    secTableEN: await text(".table td.entity-name")
+    secTableFiled: await text(".table td.filed"),
   };
 
-  return info.secTableEN;
+    return info.secTableFiled;
 })()
   .catch(err => console.error(err))
   .finally(() => browser?.close());
