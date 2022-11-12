@@ -13,11 +13,7 @@ const numShares = require("./numShares.js");
     const tweet = async () => {
         try {
             await rwClient.v2.tweet(
-                "New insider trade! (form 4 filed)" + '\n' + '\n' +
-                await nameModule() + " bought " + await numShares() + " shares at " + await priceModule() + '\n' + '\n' +
-    
-                "Stock: " + await stockModule() + '\n' +
-                "Date: " + await dateModule() + '\n'
+                //
             );
 
         } catch (error) {
@@ -26,16 +22,17 @@ const numShares = require("./numShares.js");
     }
 
     const job = new cronjob("* * * * *", async () => {
-        console.log(
-            "New form 4 filed!" + '\n' + '\n' +
-            await nameModule() + " bought " + await numShares() + " shares at " + await priceModule() + '\n' + '\n' +
+        await console.log(
+            "New insider trade! (form 4 filed)" + '\n' + '\n' +
+            await nameModule() + " bought " + await numShares() + " shares at " + "$" + await priceModule() + '\n' + '\n' +
     
+            "Amount Purchased: " + "$" + await numShares() * await priceModule() + '\n' +
             "Stock: " +  await stockModule() + '\n' +
             "Date: " + await dateModule() + '\n'
         );
     });
 
-    job.start();
+    await job.start();
 
     // CronJob, executes every 6 hours
     /*const job = new cronjob("0 14-21 * * *", () => {
