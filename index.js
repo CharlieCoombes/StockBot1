@@ -22,7 +22,7 @@ const numShares = require("./numShares.js");
     }
 
     const job = new cronjob("* * * * *", async () => {
-        await console.log(
+        console.log(
             "New insider trade! (form 4 filed)" + '\n' + '\n' +
             await nameModule() + " bought " + await numShares() + " shares at " + "$" + await priceModule() + '\n' + '\n' +
     
@@ -32,10 +32,10 @@ const numShares = require("./numShares.js");
         );
     });
 
-    await job.start();
+    job.start();
 
     // CronJob, executes every 6 hours
-    /*const job = new cronjob("0 14-21 * * *", () => {
+    /*const job = new cronjob("0 12-21 * * *", () => {
         tweet();
         console.log("Tweet executed");
     });
