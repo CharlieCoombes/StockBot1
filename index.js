@@ -47,7 +47,7 @@ const numShares = require("./numShares.js");
     job.start();
 
     // CronJob, starts from 10 am to 8pm EST
-    /*const job = new cronjob("0 15-21 * * *", () => {
+    /*const job = new cronjob("0 13-21 * * *", () => {
         tweet();
         console.log("Tweet executed");
     });
