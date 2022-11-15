@@ -47,8 +47,8 @@ module.exports = () => (async () => {
     await browser.close();
 
     // If Price is less than $0.1, throw exception
-    if (Price < 0.1) {
-      throw "Price is 0"
+    if (Price === undefined || Price < 0.1) {
+      return null;
     } else {
       return Price;
     }

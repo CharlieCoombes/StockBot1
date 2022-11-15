@@ -14,6 +14,12 @@ const numShares = require("./numShares.js");
         try {
             await rwClient.v2.tweet(
                 //
+                "New insider trade! (form 4 filed)" + '\n' + '\n' +
+                await nameModule() + " bought " + await numShares() + " shares at " + "$" + await priceModule() + '\n' + '\n' +
+        
+                "Total Amount Purchased: " + "$" + await numShares() * await priceModule() + '\n' +
+                "Stock: " +  await stockModule() + '\n' +
+                "Date: " + await dateModule() + '\n'
             );
 
         } catch (error) {
@@ -22,20 +28,26 @@ const numShares = require("./numShares.js");
     }
 
     const job = new cronjob("* * * * *", async () => {
-        console.log(
-            "New insider trade! (form 4 filed)" + '\n' + '\n' +
-            await nameModule() + " bought " + await numShares() + " shares at " + "$" + await priceModule() + '\n' + '\n' +
-    
-            "Amount Purchased: " + "$" + await numShares() * await priceModule() + '\n' +
-            "Stock: " +  await stockModule() + '\n' +
-            "Date: " + await dateModule() + '\n'
-        );
+        let price = priceModule();
+        if (price === null) {
+            console.log("Not today");
+        } else {
+            console.log(
+                "New insider trade! (form 4 filed)" + '\n' + '\n' +
+                await nameModule() + " bought " + await numShares() + " shares at " + "$" + await priceModule() + '\n' + '\n' +
+        
+                "Amount Purchased: " + "$" + await numShares() * await priceModule() + '\n' +
+                "Stock: " +  await stockModule() + '\n' +
+                "Date: " + await dateModule() + '\n'
+            );
+        }
+        
     });
 
     job.start();
 
-    // CronJob, executes every 6 hours
-    /*const job = new cronjob("0 12-21 * * *", () => {
+    // CronJob, starts from 10 am to 8pm EST
+    /*const job = new cronjob("0 15-21 * * *", () => {
         tweet();
         console.log("Tweet executed");
     });
