@@ -24,7 +24,7 @@ module.exports = () => (async () => {
 
     //Click on link to Form 4
     const a = await page.waitForSelector(".filetype .preview-file");
-    await a.click();
+    await a.click()
 
     //
     const html = await (await responseP).text();
